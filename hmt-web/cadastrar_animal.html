@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Animal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500&display=swap" rel="stylesheet">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="icons//ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+        //Função que gera o UUID
+        function generateUUID() { 
+            var d = new Date().getTime();//Timestamp
+            var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16;//Geração de número randômico entre 0 e 16
+                if(d > 0){//Usa o timestamp esgotar
+                    r = (d + r)%16 | 0;
+                    d = Math.floor(d/16);
+                } else {//Usa microssegundos desde o carregamento da página, se compatível
+                    r = (d2 + r)%16 | 0;
+                    d2 = Math.floor(d2/16);
+                }
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+        }
+        //Escolhe o campo tipo TEXT de id uuid para colocar o UUID gerado
+        var onClick = function(){
+            document.getElementById('uuid').value = generateUUID();
+        }
+        onClick();        
+        $(document).ready(function(){
+        $('.ajax').submit(function(){
+
+                var dados = $(this).serialize();
+
+
+                $.ajax({
+                        type: "POST",
+                        url: "cadastro_animal.php",
+                        data: dados,
+                        success: function( data )
+                        {
+                                alert( data );
+                        }
+                });
+
+                return false;
+        });
+    });
+    </script>
+    <style>
+        main{
+            font-family: 'Dosis', sans-serif;
+            text-transform: uppercase;
+        }
+       header{
+        width: 100%;
+        height: 40px;
+        clear: both;
+       }
+       header h2{
+       color: black;
+       padding-top: 10px;
+       }
+       section.imagem{
+        width: 40%;
+        height: 320px;
+        float: left;      
+       }
+       section.imagem img{
+        margin: 0;
+        height: 80%;
+        cursor: pointer;
+       }
+       section.formulario{
+        width: 60%;
+        height: 320px;
+        float: right;
+        /*background-color: aqua;*/
+       }
+       
+       .linha {
+        width: 100%;
+        height: 40px;
+        margin-top: 10px;
+        /*background-color: rgb(59, 185, 69);*/
+       }
+       .bloco_esquerdo {
+        width: 50%;
+        height: 30px;
+        margin-top: 5px;
+        float: left;
+        /*background-color: rgb(185, 120, 59);*/
+       }
+       .bloco_esquerdo input{
+        float: right;
+        width: 60%;
+        margin-right: 10px;
+       }
+       .bloco_direito {
+        width: 50%;
+        height: 30px;
+        margin-top: 5px;
+        float: right;
+        /*background-color: rgb(59, 139, 185);*/
+       }
+       .bloco_direto input{
+        float: right;
+        width: 100%;
+       }
+       .bloco_maior {
+        width: 60%;
+        height: 30px;
+        margin-top: 5px;
+        float: left;
+        /*background-color: rgb(185, 120, 59);*/
+       }
+       .bloco_maior input{
+        float: right;
+        width: 80%;
+        margin-right: 20px;
+        font-family: 'Dosis', sans-serif;
+       }
+       select{
+        float: right;
+        width: 82%;
+        margin-right: 20px;
+        font-family: 'Dosis', sans-serif;
+       }
+       .bloco_menor {
+        width: 40%;
+        height: 30px;
+        margin-top: 5px;
+        float: right;
+        /*background-color: rgb(187, 107, 167);*/
+       }
+       .bloco_menor2 {
+        width: 40%;
+        height: 30px;
+        margin-top: 5px;
+        float: right;
+        /*background-color: rgb(59, 139, 185);*/
+        text-align: center;
+       }
+       .bloco_menor input{
+        float: right;
+        width: 50%;
+        margin-right: 70px;
+       }
+       input[type="date" i]{
+        width: 30%;
+       }
+       div img{
+        margin-left: 50px;
+        width: 5%;
+        cursor: pointer;
+       }
+       input.text_menor{
+        width: 70%;
+       }
+       .botao01{
+        text-decoration: none;
+        background-color: rgb(61, 104, 184);
+        position: relative;
+        clear: both;
+        width: 120px;
+        color: white;
+        padding: 2px 2px;
+        border-radius: 3px;
+        text-align: center;
+        margin: auto;
+        cursor: pointer;
+       }
+       .botao02{
+        text-decoration: none;
+        background-color: rgb(61, 104, 184);
+        position: relative;
+        clear: both;
+        width: 120px;
+        color: white;
+        padding: 2px 42px;
+        border-radius: 3px;
+        font-family: 'Dosis', sans-serif;
+        text-transform: uppercase;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+       }
+       .botao01:hover{
+        background-color: rgb(87, 133, 231);
+       }
+       .botao02:hover{
+        background-color: rgb(87, 133, 231);
+       }
+       select#sexo.sexo{
+        width: 50%;
+        margin-right: 70px;
+       }
+        #picture__input {
+        display: none;
+                }
+        .picture {
+        width: 400px;
+        aspect-ratio: 16/9;
+        margin-top: 20px;
+        background: #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #aaa;
+        border: 2px dashed currentcolor;
+        cursor: pointer;
+        font-family: sans-serif;
+        transition: color 300ms ease-in-out, background 300ms ease-in-out;
+        outline: none;
+        overflow: hidden;
+        }
+
+        .picture:hover {
+        color: #777;
+        background: #ccc;
+        }
+
+        .picture:active {
+        border-color: turquoise;
+        color: turquoise;
+        background: #eee;
+        }
+
+        .picture:focus {
+        color: #777;
+        background: #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .picture__img {
+        max-width: 100%;
+        float: left;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h2>Cadastrar animal</h2>
+        </header>
+        <form action="cadastro_animal.php" method="post" enctype="multipart/form-data"class='ajax'>
+            <!--<form action="" method="" enctype="multipart/form-data" class='ajax'></form>-->
+        <section class="imagem">
+            <label class="picture" for="picture__input" tabIndex="0">
+                <span class="picture__image"></span>
+              </label>
+              
+              <input type="file" name="picture__input" id="picture__input" required>
+              <script>
+                const inputFile = document.querySelector("#picture__input");
+                    const pictureImage = document.querySelector(".picture__image");
+                    const pictureImageTxt = "Escolha uma imagem";
+                    pictureImage.innerHTML = pictureImageTxt;
+
+                    inputFile.addEventListener("change", function (e) {
+                    const inputTarget = e.target;
+                    const file = inputTarget.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.addEventListener("load", function (e) {
+                        const readerTarget = e.target;
+
+                        const img = document.createElement("img");
+                        img.src = readerTarget.result;
+                        img.classList.add("picture__img");
+
+                        pictureImage.innerHTML = "";
+                        pictureImage.appendChild(img);
+                        });
+
+                        reader.readAsDataURL(file);
+                    } else {
+                        pictureImage.innerHTML = pictureImageTxt;
+                    }
+                    });
+
+              </script>
+        </section>
+        <section class="formulario">
+            <form action="captura.php" method="post">
+            <div class="linha">
+                <div class="bloco_maior">
+                    <label for="">ID:</label>
+                    <input id="uuid" name="uuid" type="text" required placeholder="00000000-0000-0000-0000-000000000000">
+                </div>
+                <div class="bloco_menor">
+                    <label for="">ler tag:</label>
+                    <img src="images/rfid.PNG" alt="" class="rfid" onclick="onClick();">
+                    
+                </div>
+            </div>
+            <div class="linha">
+                <div class="bloco_maior">
+                    <label for="raca">Raça:</label>
+                    <select name="raca" id="raca" required class="texto">
+                        <optgroup >
+                            <option value="Angus">Angus</option>
+                            <option value="Nelore">Nelore</option>
+                            <option value="Brahman">Brahman</option>
+                            <option value="Brangus">Brangus</option>
+                            <option value="Senepol">Senepol</option>
+                            <option value="Hereford">Hereford</option>
+                            <option value="Caracu">Caracu</option>
+                            <option value="Charoles">Charolês</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="bloco_menor">
+                    <label for="">Peso (kg):</label>
+                    <input id="peso" name="peso" type="number" required>
+                </div>
+            </div>
+            <div class="linha">
+                <div class="bloco_maior">
+                    <label for="">Nome:</label>
+                    <input type="text" name="nome" id="nome" required placeholder="Digite o nome do animal">
+                </div>
+                <div class="bloco_menor">
+                    <label for="">Sexo:</label>
+                        <select name="sexo" id="sexo" required class="sexo">
+                            <optgroup >
+                                <option value="MALE">Macho</option>
+                                <option value="FEMALE">Fêmea</option>
+                            </optgroup>
+                        </select>
+                </div>
+            </div>
+            <div class="linha">
+                <div class="bloco_maior">
+                    <label for="">Nome da Mãe:</label>
+                    <input type="text" class="text_menor" name="nome_mae" list="lista_mae" id="nome_mae" required placeholder="Digite ou escolha o nome da mãe">
+                    <datalist id="lista_mae" class="texto">
+                        <option value="260cf96d-fc10-4ea7-bde9-8e8fb1a1cc2e">Andorinha</option>
+                        <option value="522f75bb-b03a-41c6-812d-b93d0c77e548">Amy</option>
+                        <option value="0f40b75a-d50b-4313-8a63-dca08f9f365e">Biduzinha</option>
+                        <option value="54196440-3555-4ebc-914f-1b00f82c6829">Catucha</option>
+                        <option value="55d1a1db-fa77-43a0-b07e-b5691ce961fa">Estela</option>
+                        <option value="1b0f4f46-e581-45b7-828b-f752e6b12336">Lolita</option>
+                        <option value="f220d1b6-07db-4b77-b810-3825c3082cbb">Missy</option>
+                        <option value="4d272fdc-dfee-46a7-90f8-e3a8a5a05a9c">Xênia</option>
+                    </datalist>
+                </div>
+                <div class="bloco_menor2">
+                    <a href="" class="botao02">limpar</a>
+                </div>
+            </div>
+            <div class="linha">
+                <div class="bloco_maior">
+                    <label for="">Nome do Pai:</label>
+                    <input type="text" class="text_menor" name="nome_pai" list="lista_pai" id="nome_pai" required placeholder="Digite ou escolha o nome do pai">
+                    <datalist id="lista_pai" class="texto">
+                        <option value="168316d1-164e-4996-9542-50ec8abc3bb3">Amarelo</option>
+                        <option value="42e65227-67b5-4853-a220-7ea332ff77e1">Amargo</option>
+                        <option value="d1a18870-0ef1-4c0d-826e-4a0d059817b1">Apolo</option>
+                        <option value="c75b7a05-2f8f-4ea7-8feb-e0179846e6de">Bilú</option>
+                        <option value="b62c19dd-9a94-4a62-81ed-5dd8fb3e9a4a">Benedito</option>
+                        <option value="1ee40ba9-07fa-482e-8267-517b34e1fb7e">Bobô</option>
+                        <option value="d17a8a74-9b66-4a9b-af44-dd1a01069521">Brutos</option>
+                        <option value="f0cafc3d-d209-4764-9738-9e5b308d94ae">Manhoso</option>
+                    </datalist><br>
+                </div>
+                <div class="bloco_menor2">
+                    <input type="submit" class="botao02" name="Salvar" value="Salvar"> 
+                </div>
+            </div>
+            <div class="linha">
+                <div class="bloco_maior">
+                    <label for="">Data de Nascimento:</label>
+                    <input type="date" id="data_nascimento" name="data_nascimento" required>
+                </div>
+                <div class="bloco_menor2">
+                </div>
+            </div>
+        </form>
+        </section>
+    </form>
+    </main>
+</body>
+</html>
