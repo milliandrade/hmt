@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ICMU-T1-rastreamento-bovino</groupId>
-	<artifactId>ICMU-T1-rastreamento-bovino</artifactId>
+	<groupId>HMT-PN-APPLICATION</groupId>
+	<artifactId>HMT-PN-APPLICATION</artifactId>
 	<version>0.1</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -12,6 +12,33 @@
 				<configuration>
 					<release>17</release>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>
+                        icmu.rastreamento.processnode.PNApplication
+                    </mainClass>
+                    		<!--mainClass>
+                        icmu.nodes.DroneNode
+                    </mainClass-->
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
