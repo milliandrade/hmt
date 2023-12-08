@@ -65,8 +65,6 @@ public class DataBaseConnection {
 
 			// jdbc:mysql://ip-do-servidor:porta/banco-de-dados?useSSL=false
 
-			// String username = "millena"; // nome de um usuário de seu BD
-			// String password = "Spoilt69"; // sua senha de acesso
 			System.out.println("antes");
 			connection = DriverManager.getConnection(url, Constants.USERNAME, Constants.PASSWD);
 			System.out.println("depois");

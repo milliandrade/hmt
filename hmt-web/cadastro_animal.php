@@ -1,10 +1,12 @@
 
 <?php
 header( "refresh:2;url=listar_animal.php" );      
-$servername = "127.0.0.1";
-$username = "millena";
-$password = "Spoilt69";
-$dbname = "hmt";
+$config = parse_ini_file('config.ini');
+         
+$servername = $config['servername'];
+$username = $config['username'];
+$password = $config['password'];
+$dbname = $config['dbname'];
 $table = "ox";
 $nome = $_POST['nome'];
 $uuid = $_POST['uuid'];

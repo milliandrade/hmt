@@ -14,10 +14,12 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script>
     <?php
-        $servername = "127.0.0.1";
-        $username = "millena";
-        $password = "Spoilt69";
-        $dbname = "hmt";
+        $config = parse_ini_file('config.ini');
+         
+        $servername = $config['servername'];
+        $username = $config['username'];
+        $password = $config['password'];
+        $dbname = $config['dbname'];
         $table = "graze";
 
     // Create connection
