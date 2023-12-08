@@ -69,3 +69,4 @@ _Note: Functionalities as Grazing track does not work in demo mode, because it n
 The farm module can be simulated using the [Herd identification](https://github.com/milliandrade/herd_identification) simulation in GrADyS.
 
 ## Technical Documentation
+For more information, read the [HMT-Technical Document](https://github.com/milliandrade/hmt_sw/blob/main/HMT-technical_document.pdf).
